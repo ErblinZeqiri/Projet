@@ -25,4 +25,4 @@ class DatabaseTools():
             self.db.close()
         else:
             print("Dans la méthode close_connection et y'a rien a fermer")
-            #sdfsf
+            #sddsfsd
