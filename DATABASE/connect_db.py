@@ -59,4 +59,3 @@ class DatabaseTools():
         else:
             print("Dans la méthode is_connection_open et y'a rien à fermer")
             return False
-        #sdfs

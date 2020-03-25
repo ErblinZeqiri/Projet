@@ -14,7 +14,7 @@ try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
     insert_records = insert_one_table.DbInsertOneTable()
 
-    valeur_debile_mais_presque_aleatoire_a_inserer = "grosse crocoll"
+    valeur_debile_mais_presque_aleatoire_a_inserer = "grosse  casavyvy"
     # Ligne pour afficher la valeur dans la console...c'est tout
     print(valeur_debile_mais_presque_aleatoire_a_inserer)
 
