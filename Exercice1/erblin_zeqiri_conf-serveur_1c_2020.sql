@@ -1,7 +1,7 @@
--- OM 2020.02.12
+-- EZ 2020.04.02
 -- FICHIER MYSQL POUR FAIRE FONCTIONNER LES EXEMPLES
 -- DE REQUETES MYSQL
--- Database: NOM_PRENOM_SUJET_BD_104_2020
+-- Database: erblin_zeqiri_conf-serveur_1c_2020
 
 -- Détection si une autre base de donnée du même nom existe
 
@@ -13,14 +13,14 @@ CREATE DATABASE IF NOT EXISTS erblin_zeqiri_conf-serveur_1c_2020;
 
 -- Utilisation de cette base de donnée
 
-USE erblin_zeqiri_conf-serveur_1c_2020;
+USE NOM_PRENOM_SUJET_BD_104_2020;
 -- --------------------------------------------------------
 -- phpMyAdmin SQL Dump
 -- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Dim 29 Mars 2020 à 13:53
+-- Généré le :  Jeu 02 Avril 2020 à 18:04
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -94,7 +94,8 @@ CREATE TABLE `t_personne` (
 
 INSERT INTO `t_personne` (`ID_Personne`, `Nom_Pers`, `Prenom_Pers`, `Date_Naissance_Pers`) VALUES
 (1, 'Zeqiri', 'Erblin', '1998-10-17'),
-(2, 'erer', 'reererwre', '2018-11-22');
+(2, 'clowneriea', 'reererwre', '2018-11-22'),
+(4, 'Jean', 'Dujardin', '1985-11-25');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,8 @@ CREATE TABLE `t_pers_a_serveur` (
 
 INSERT INTO `t_pers_a_serveur` (`ID_Pers_A_Serveur`, `FK_Personne`, `FK_Serveur`, `Date_Pers_Ask_Serveur`) VALUES
 (1, 2, 2, '2020-03-10 17:06:27'),
-(2, 1, 1, '2020-03-10 17:06:27');
+(2, 1, 1, '2020-03-10 17:06:27'),
+(3, 1, 3, '2020-03-29 14:56:41');
 
 -- --------------------------------------------------------
 
@@ -146,6 +148,7 @@ INSERT INTO `t_pers_a_serveur` (`ID_Pers_A_Serveur`, `FK_Personne`, `FK_Serveur`
 
 CREATE TABLE `t_serveur` (
   `ID_Serveur` int(11) NOT NULL,
+  `Nom_Serv` varchar(30) NOT NULL,
   `Nombre_Port` int(24) NOT NULL,
   `Nombre_U` int(42) NOT NULL,
   `Date_Conf_Serv` date NOT NULL,
@@ -158,10 +161,10 @@ CREATE TABLE `t_serveur` (
 -- Contenu de la table `t_serveur`
 --
 
-INSERT INTO `t_serveur` (`ID_Serveur`, `Nombre_Port`, `Nombre_U`, `Date_Conf_Serv`, `Description`, `Puissance`, `Date_Serveur`) VALUES
-(1, 2, 4, '2020-03-18', 'voila voila', 51, '2020-03-10 15:13:24'),
-(2, 31121231, 2111, '2020-03-25', 'qweweqewq', 21321321, '2020-03-10 17:05:29'),
-(3, 0, 0, '0000-00-00', 'voilà c\'est tellement rose', 0, '2020-03-24 19:42:46');
+INSERT INTO `t_serveur` (`ID_Serveur`, `Nom_Serv`, `Nombre_Port`, `Nombre_U`, `Date_Conf_Serv`, `Description`, `Puissance`, `Date_Serveur`) VALUES
+(1, '', 2, 4, '2020-03-18', 'voila voila', 51, '2020-03-10 15:13:24'),
+(2, '', 31121231, 2111, '2020-03-25', 'qweweqewq', 21321321, '2020-03-10 17:05:29'),
+(3, '', 0, 0, '0000-00-00', 'voilà c\'est tellement rose', 0, '2020-03-24 19:42:46');
 
 -- --------------------------------------------------------
 
@@ -364,7 +367,7 @@ ALTER TABLE `t_mail`
 -- AUTO_INCREMENT pour la table `t_personne`
 --
 ALTER TABLE `t_personne`
-  MODIFY `ID_Personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `t_pers_a_mail`
 --
@@ -374,7 +377,7 @@ ALTER TABLE `t_pers_a_mail`
 -- AUTO_INCREMENT pour la table `t_pers_a_serveur`
 --
 ALTER TABLE `t_pers_a_serveur`
-  MODIFY `ID_Pers_A_Serveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Pers_A_Serveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `t_serveur`
 --

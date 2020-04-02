@@ -1,25 +1,14 @@
 # connect_db.py
-<<<<<<< HEAD
-# EZ 2020.03.12 Connexion bd
-=======
 # OM 2020.03.12 Connexion bd
->>>>>>> wdaw
 
 import pymysql
 import pymysql.cursors
 
-<<<<<<< HEAD
-
-=======
->>>>>>> wdaw
 # OM 2020.03.16 Se connecter à la BD.
 class DatabaseTools():
     def __init__(self):
         print("Constructeur classe DatabaseTools ")
-<<<<<<< HEAD
-=======
 
->>>>>>> wdaw
         try:
             # OM 2019.03.09 ON SE CONNECTE A LA BASE DE DONNEE
             # ATTENTION : LE MOT DE PASSE PEUT CHANGER SUIVANT LE SERVEUR MySql QUE VOUS CHOISSISSEZ !!! (Uwamp, Xampp, etc)
@@ -29,10 +18,6 @@ class DatabaseTools():
             # un curseur est directement à disposition, il faudra le fermer une fois que les actions sont réalisées
             self.DBcursor = self.db.cursor()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> wdaw
         # OM 2020.03.11 Si il y a un problème avec la BD (non connectée, nom erronné, etc) on peut envoyer un message plus précis que le précédent
         except pymysql.DatabaseError as error:
             # OM 2019.03.09 SI LA BD N'EST PAS CONNECTEE, ON ENVOIE AU TERMINAL DES MESSAGES POUR RASSURER L'UTILISATEUR.
@@ -55,11 +40,6 @@ class DatabaseTools():
             raise ValueError(f"Impossible de connecter la BD\n{error}") from None
             self.mon_curseur_db.close()
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> wdaw
     # OM 2020.03.11 Petite méthode pour fermer la connection à la BD
     def close_connection(self):
         if self.db.open:
@@ -75,8 +55,4 @@ class DatabaseTools():
             return True
         else:
             print("Dans la méthode is_connection_open et y'a rien à fermer")
-<<<<<<< HEAD
             return False
-=======
-            return False
->>>>>>> wdaw
