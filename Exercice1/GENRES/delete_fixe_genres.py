@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 # delete_fixe_genres.py
-=======
-# delete_fixe_genre.py
 # OM 2020.03.10 le but est d'effacer une ligne d'une table en MySql.
 # On doit modifier la valeur de la variable "numero_ligne_table_delete"
->>>>>>> wdaw
 # Si on démarre ce fichier plusieurs fois, alors MySql ne renvoie pas d'erreur, car effacer une ligne inexistante dans une table
 # ce n'est pas considéré comme une erreur, mais simplement MySql renvoie le nombre de lignes effacées dans ce cas : 0 lignes effacées.
 
@@ -16,19 +12,10 @@ try:
     delete_record = delete_one_record_one_table.DbDeleteOneTable()
     # OM 2020.01.28 Impose le numéro de la ligne à effacer dans la table.
     # A changer à la main pour essayer sur votre BD.
-<<<<<<< HEAD
-    numero_ligne_table_delete = 5
-    # OM 2020.03.11 Fonction DELETE avec le numéro de la ligne à effacer passée en paramètre.
-    delete_record.delete_one_record_one_table("""DELETE FROM t_genres WHERE id_genre = %(no_ligne_delete)s""",numero_ligne_table_delete)
-except Exception as e:
-    # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
-    print("error message: {0}".format(e))
-=======
-    numero_ligne_table_delete = 3
+    numero_ligne_table_delete = 7
     # OM 2020.03.11 Fonction DELETE avec le numéro de la ligne à effacer passée en paramètre.
     delete_record.delete_one_record_one_table("""DELETE FROM t_genres WHERE id_genre = %(no_ligne_delete)s""",numero_ligne_table_delete)
 
 except Exception as erreur:
     # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
     print("error message: {0}".format(erreur))
->>>>>>> wdaw

@@ -1,10 +1,10 @@
-# update_fixe_serveur_personnalise.py
-# OM 2020.03.26 le but est de mettre à jour une ligne d'une table en MySql.
+# update_fixe_location.py
+# EZ 2020.04.05 le but est de mettre à jour une ligne d'une table en MySql.
 # On doit modifier la valeur de la variable "numero_ligne_table_update"
 # On doit modifier le contenu de la "valeur_genre"
 
 # Importer le fichier "update_one_record_one_table.py" dans lequel il y a quelques classes et méthodes en rapport avec la mise à jour des données dans UNE SEULE table.
-from DATABASE.UPDATE import update_one_record_one_table
+from Exercice1.DATABASE.UPDATE import update_one_record_one_table
 
 try:
     # OM 2020.03.26 Une instance "update_record" pour permettre l'utilisation des méthodes de la classe DbUpdateOneTable
@@ -12,7 +12,7 @@ try:
 
     # OM 2020.03.26 Impose le numéro de la ligne à mettre à jour dans la table t_genres.
     # A changer à la main pour essayer sur votre BD.
-    numero_ligne_table_update = 5
+    numero_ligne_table_update = 2
 
     # Définir une valeur pour la mise à jour du champ "intitule_genre"
     valeur_genre = "clowneriea"
@@ -28,7 +28,7 @@ try:
     valeur_update_dictionnaire = {'value_intitule_genre': valeur_genre, 'no_ligne_update': numero_ligne_table_update}
 
     # Pour la mise à jour on doit avoir au moins deux valeurs "numero_ligne_table_update" et "valeur_genre"
-    mysql_update_string = "UPDATE t_genres SET intitule_genre = %(value_intitule_genre)s WHERE id_genre = %(no_ligne_update)s"
+    mysql_update_string = "UPDATE t_type_equipement SET Type_Equipement = %(value_intitule_genre)s WHERE ID_Type_Equipement = %(no_ligne_update)s"
 
     # OM 2020.03.26 Fonction UPDATE avec le numéro de la ligne à mettre à jour et la nouvelle valeur du champ "intitule_genre"
     update_record.update_one_record_one_table(mysql_update_string,

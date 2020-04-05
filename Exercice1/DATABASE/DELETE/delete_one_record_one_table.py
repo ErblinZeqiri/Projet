@@ -1,41 +1,23 @@
 # delete_fixe_one_rec_one_table.py
-<<<<<<< HEAD
-# OM 2020.03.10 le but est d'effacer une ligne d'une table en MySql
-
-
-from DATABASE import connect_db
-=======
 # OM 2020.03.10 le but est d'effacer une ligne d'une table en MySql.
->>>>>>> wdaw
 
 import pymysql
 import warnings
 
-<<<<<<< HEAD
-
-# OM 2020.03.02 Mécanisme ingénieux qui filtre les warnings et les associes
-# pour être traitées comme des erreurs dans le code Python.
-
-
-=======
-from DATABASE import connect_db
+from Exercice1.DATABASE import connect_db
 
 # OM 2020.03.02 Mécanisme ingénieux qui filtre les warnings et les associes
 # pour être traitées comme des erreurs dans le code Python.
 # détecte la suite de caractères "Duplicate entry." dans un message de warnings
 # et convertit le warnings en action "error"
->>>>>>> wdaw
 warnings.filterwarnings(
   action="error",
   message=".*Duplicate entry.*",
   category=pymysql.Warning
 )
-<<<<<<< HEAD
-=======
 
 # détecte la suite de caractères "1265." dans un message de warnings
 # et convertit le warnings en action "error"
->>>>>>> wdaw
 warnings.filterwarnings(
   action="error",
   message=".*1265.*",
@@ -45,20 +27,6 @@ warnings.filterwarnings(
 class DbDeleteOneTable():
 
     # Constructeur, à chaque instanciation de cette classe "DbInsertOneTable()" les lignes de code de la méthode "__init__ (self)" sont interprétées.
-<<<<<<< HEAD
-    def __init__ (self):  # Constructeur
-        print("Constructeur CLASSE DbDeleteOneTable")
-
-
-
-    def delete_one_record_one_table(self, requete_delete_mysql, num_ligne_delete):
-        try:
-            # OM 2020.01.28 CONNECTION A LA BD
-            self.connection_dbc = connect_db.DatabaseTools()
-            self.connection_dbc.is_connection_open()
-
-            #self.DBcursor = connect_db.DatabaseTools.connect_ma_bd().
-=======
     def __init__ (self):
         print("Constructeur CLASSE DbDeleteOneTable")
 
@@ -84,7 +52,6 @@ class DbDeleteOneTable():
             # Afficher les docstrings...très importantes pour votre projet.
             print(self.delete_one_record_one_table.__doc__)
 
->>>>>>> wdaw
             # OM 2020.03.11 Execute la requête avec un passage de paramètres
             self.connection_dbc.DBcursor.execute(requete_delete_mysql, {'no_ligne_delete' : num_ligne_delete})
             # OM 2020.03.11 L'instruction suivante est indispensable pour confirmer l'effacement des données (en cas de problèmes : rollback)
@@ -125,12 +92,7 @@ class DbDeleteOneTable():
             self.connection_dbc.db.rollback()
             print("Unknown error occurred")
         finally:
-<<<<<<< HEAD
-            print("C'est terminé....finally self.DBcursor.close()")
-            self.connection_dbc.DBcursor.close()
-=======
             # On ferme le curseur et la base de donnée et on affiche un message dans la console.
             self.connection_dbc.DBcursor.close()
             self.connection_dbc.close_connection()
             print("DBcursor et DB fermés")
->>>>>>> wdaw

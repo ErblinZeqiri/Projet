@@ -1,8 +1,8 @@
-# insert_one_row_personne_serveur.py
-# OM 2698.03.27 Permet d'insérer des valeurs dans la table "t_genres_films"
+# insert_one_row_personne_location.py
+# EZ 2020.04.05 Permet d'insérer des valeurs dans la table "t_genres_films"
 
 # Importer le fichier "InsertOneTable" dans lequel il y a quelques classes et méthodes en rapport avec le sujet d'insertion dans UNE SEULE table.
-from DATABASE.INSERT import insert_one_table
+from Exercice1.DATABASE.INSERT import insert_one_table
 
 try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable

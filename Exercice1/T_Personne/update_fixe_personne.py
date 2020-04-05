@@ -1,10 +1,10 @@
-# update_fixe_personne.py
-# OM 2020.03.26 le but est de mettre à jour une ligne d'une table en MySql.
+# update_fixe_location.py
+# EZ 2020.04.05 le but est de mettre à jour une ligne d'une table en MySql.
 # On doit modifier la valeur de la variable "numero_ligne_table_update"
 # On doit modifier le contenu de la "valeur_genre"
 
 # Importer le fichier "update_one_record_one_table.py" dans lequel il y a quelques classes et méthodes en rapport avec la mise à jour des données dans UNE SEULE table.
-from DATABASE.UPDATE import update_one_record_one_table
+from Exercice1.DATABASE.UPDATE import update_one_record_one_table
 
 try:
     # OM 2020.03.26 Une instance "update_record" pour permettre l'utilisation des méthodes de la classe DbUpdateOneTable

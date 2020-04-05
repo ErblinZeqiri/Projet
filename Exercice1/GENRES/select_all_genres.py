@@ -1,10 +1,10 @@
-# select_all_personne.py
-# OM 2020.03.26 le but est d'afficher tous les lignes de la table "t_genres" en MySql.
+# select_all_serveur.py
+# EZ 2020.04.05 le but est d'afficher tous les lignes de la table "t_genres" en MySql.
 
 # Importer le fichier "select_table.py" dans lequel il y a quelques classes et méthodes en rapport avec l'affichage des données dans UNE SEULE table.
 import json
 
-from DATABASE.SELECT import select_table
+from Exercice1.DATABASE.SELECT import select_table
 
 try:
     # OM 2020.03.26 Une instance "select_record" pour permettre l'utilisation des méthodes de la classe DbSelectOneTable

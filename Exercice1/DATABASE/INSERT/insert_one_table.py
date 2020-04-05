@@ -1,25 +1,14 @@
 # insert_one_table.py
-# OM 2020.03.10 le but est d'insérer des valeurs en MySql dans une seule table
+# EZ 2020.04.05 le but est d'insérer des valeurs en MySql dans une seule table
 import pymysql
-from DATABASE import connect_db
+from Exercice1.DATABASE import connect_db
 
-<<<<<<< HEAD
-
-class DbInsertOneTable():
-
-    # Constructeur, à chaque instanciation de cette classe "DbInsertOneTable()" les lignes de code de la méthode "__init__ (self)" sont interprétées.
-    def __init__ (self):  # Constructeur
-        print("Constructeur CLASSE DbInsertOneTable")
-
-
-=======
 class DbInsertOneTable():
 
     # Constructeur, à chaque instanciation de cette classe "DbInsertOneTable()" les lignes de code de la méthode "__init__ (self)" sont interprétées.
     def __init__ (self):
         print("Constructeur CLASSE DbInsertOneTable")
 
->>>>>>> wdaw
     def insert_one_record_one_table(self, requete_insert_mysql, valeurs_a_inserer):
         """
         Méthode qui permet d'insérer UNE seule valeur passée en paramètre.
@@ -27,23 +16,13 @@ class DbInsertOneTable():
                 Parametres:
                         requete_insert_mysql (class 'str'): une classe string
                         valeurs_insertion (class 'dict'): une classe dictionnaire
-<<<<<<< HEAD
-
                 Retourne:
                         pas de valeurs
-
-=======
-                Retourne:
-                        pas de valeurs
->>>>>>> wdaw
         """
         try:
             # OM 2020.01.28 CONNECTION A LA BD
             self.connection_dbc = connect_db.DatabaseTools()
-<<<<<<< HEAD
-=======
             # Un simple test qui renvoie un message dans la console suivant l'état de la BD
->>>>>>> wdaw
             self.connection_dbc.is_connection_open()
 
             # Pour aider à comprendre les types de données on affiche dans la console
@@ -54,11 +33,7 @@ class DbInsertOneTable():
 
             # OM 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
             self.connection_dbc.db.commit()
-<<<<<<< HEAD
-            self.connection_dbc.DBcursor.close()
-=======
 
->>>>>>> wdaw
         except pymysql.Error as error:
             # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
@@ -94,16 +69,10 @@ class DbInsertOneTable():
             self.connection_dbc.db.rollback()
             print("Unknown error occurred")
         finally:
-<<<<<<< HEAD
-            print("C'est terminé....finally self.DBcursor.close()")
-            self.connection_dbc.DBcursor.close()
-
-=======
             # On ferme le curseur et la base de donnée et on affiche un message dans la console.
             self.connection_dbc.DBcursor.close()
             self.connection_dbc.close_connection()
             print("DBcursor et DB fermés")
->>>>>>> wdaw
 
 
     def insert_one_record_many_values_one_table(self, requete_insert_mysql, valeurs_insertion):
@@ -113,28 +82,12 @@ class DbInsertOneTable():
                 Parametres:
                         requete_insert_mysql (class 'str'): une classe string
                         valeurs_insertion (class 'dict'): une classe dictionnaire
-<<<<<<< HEAD
-
                 Retourne:
                         pas de valeurs
-
-=======
-                Retourne:
-                        pas de valeurs
->>>>>>> wdaw
         """
         try:
             # OM 2020.01.28 CONNECTION A LA BD
             self.connection_dbc = connect_db.DatabaseTools()
-<<<<<<< HEAD
-            self.connection_dbc.is_connection_open()
-
-            print(type(requete_insert_mysql))
-            print(type(valeurs_insertion))
-            print(self.insert_one_record_many_values_one_table.__doc__)
-            # OM 2020.03.11 Execute la requête avec un passage de paramètres
-            # self.DBcursor.execute(requete_insert_mysql, {'values_insert' : valeurs_a_inserer, 'values_insert_2' : values_2})
-=======
             # Un simple test qui renvoie un message dans la console suivant l'état de la BD
             self.connection_dbc.is_connection_open()
 
@@ -145,16 +98,11 @@ class DbInsertOneTable():
             print(self.insert_one_record_many_values_one_table.__doc__)
 
             # OM 2020.03.11 Execute la requête avec un passage de paramètres
->>>>>>> wdaw
             self.connection_dbc.DBcursor.execute(requete_insert_mysql, valeurs_insertion)
 
             # OM 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
             self.connection_dbc.db.commit()
-<<<<<<< HEAD
-            self.connection_dbc.DBcursor.close()
-=======
 
->>>>>>> wdaw
         except pymysql.Error as error:
             # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
@@ -190,12 +138,7 @@ class DbInsertOneTable():
             self.connection_dbc.db.rollback()
             print("Unknown error occurred")
         finally:
-<<<<<<< HEAD
-            print("C'est terminé....finally self.DBcursor.close()")
-            self.connection_dbc.DBcursor.close()
-=======
             # On ferme le curseur et la base de donnée et on affiche un message dans la console.
             self.connection_dbc.DBcursor.close()
             self.connection_dbc.close_connection()
             print("DBcursor et DB fermés")
->>>>>>> wdaw

@@ -1,32 +1,15 @@
 # insert_genres_one_value.py
-<<<<<<< HEAD
-# OM 2698.03.21 essai d'insertion
-=======
 # OM 2698.03.21 Démonstration de l'insertion d'une valeur dans un champ d'une table.
->>>>>>> wdaw
 
 from DATABASE import connect_db
 # Importer le fichier "InsertOneTable" dans lequel il y a quelques classes et méthodes en rapport avec le sujet d'insertion dans UNE SEULE table.
 from DATABASE.INSERT import insert_one_table
 
-<<<<<<< HEAD
-#  OM 2020.03.11 Indispensable en cas de problèmes, gérer les erreurs en informatique
-try:
-
-    # OM 202.03.11 Démonstration en classe, juste pour "faire" un objet "objet_etre_connecte" (instancier la classe)
-    connection_dbc = connect_db.DatabaseTools()
-
-    # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
-    insert_records = insert_one_table.DbInsertOneTable()
-
-    valeur_debile_mais_presque_aleatoire_a_inserer = "grosse  casavyvy"
-=======
 try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
     insert_records = insert_one_table.DbInsertOneTable()
 
     valeur_debile_mais_presque_aleatoire_a_inserer = "je vous aime "
->>>>>>> wdaw
     # Ligne pour afficher la valeur dans la console...c'est tout
     print(valeur_debile_mais_presque_aleatoire_a_inserer)
 
@@ -40,16 +23,7 @@ try:
     # dans la table "t_genres"
     insert_records.insert_one_record_one_table(mysql_insert_string,
                                                valeur_debile_mais_presque_aleatoire_a_inserer)
-<<<<<<< HEAD
-    # Ferme la connection à la BD
-    connection_dbc.close_connection()
-    # OM 2020.01.28 C'est un simple test, pour savoir si la BD est bien fermée.
-    connection_dbc.is_connection_open()
-
-except Exception as erreur:
-=======
 
 except Exception as erreur:
     # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
->>>>>>> wdaw
     print("Message erreur {0}".format(erreur))

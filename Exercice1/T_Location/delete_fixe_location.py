@@ -12,9 +12,9 @@ try:
     delete_record = delete_one_record_one_table.DbDeleteOneTable()
     # OM 2020.01.28 Impose le numéro de la ligne à effacer dans la table.
     # A changer à la main pour essayer sur votre BD.
-    numero_ligne_table_delete = 2
+    numero_ligne_table_delete = 3
     # OM 2020.03.11 Fonction DELETE avec le numéro de la ligne à effacer passée en paramètre.
-    delete_record.delete_one_record_one_table("""DELETE FROM t_personne WHERE ID_Personne = %(no_ligne_delete)s""",numero_ligne_table_delete)
+    delete_record.delete_one_record_one_table("""DELETE FROM t_location WHERE ID_Location = %(no_ligne_delete)s""",numero_ligne_table_delete)
 
 except Exception as erreur:
     # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.

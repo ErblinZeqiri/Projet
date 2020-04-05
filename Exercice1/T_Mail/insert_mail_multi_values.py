@@ -8,14 +8,12 @@ try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
     insert_records = insert_one_table.DbInsertOneTable()
 
-    valeur_ins_1 = "Jean"
-    valeur_ins_2 = "Dujardin"
-    valeur_ins_3 = "1985-11-25"
+    valeur_ins_1 = "Jean@dujardin.ch"
     # Afficher les valeurs dans la console...c'est tout, vraiment tout !
-    print("valeur_ins_1 ",valeur_ins_1, "valeur_ins_2 ",valeur_ins_2, "valeur_ins_3 ",valeur_ins_3)
+    print("valeur_ins_1 ",valeur_ins_1)
 
     # Définitions d'un dictionnaire pour passer les valeurs en paramètres de façon un "peu" sécurisée dans la BD
-    valeurs_insertion_dictionnaire = {'value_Nom_Pers': valeur_ins_1, 'value_Prenom_Pers': valeur_ins_2, 'Date_Naissance_Pers': valeur_ins_3}
+    valeurs_insertion_dictionnaire = {'value_Adresse_Mail': valeur_ins_1}
 
     # OM 2020.01.28 Pour éviter les injections SQL, il est possible de passer les valeurs à insérer sous forme "paramètrée" (avec le %(...)s au lieu de %s)
     # Pour les vrais geeks et geeketes consulter le site ci-dessous.
@@ -24,8 +22,8 @@ try:
     # Une longue chaîne de caractères (format PEP8 selon proposition de PyCharm)
     # Je décide d'insèrer 3 valeurs sur 6, on voit ainsi la correspondance des positions entre les attributs
     # de la BD et les variables Python définies juste en dessus.
-    mysql_insert_string = "INSERT INTO t_personne (ID_Personne, Nom_Pers, Prenom_Pers, Date_Naissance_Pers) " \
-                          "VALUES (NULL, %(value_Nom_Pers)s, %(value_Prenom_Pers)s, %(Date_Naissance_Pers)s)"
+    mysql_insert_string = "INSERT INTO t_mail (ID_Mail, Adresse_Mail)" \
+                          "VALUES (NULL, %(value_Adresse_Mail)s)"
     # Insertion des valeurs définie dans la variable dictionnaire "valeurs_insertion_dictionnaire"
     # dans la table "t_films"
     insert_records.insert_one_record_many_values_one_table(mysql_insert_string,

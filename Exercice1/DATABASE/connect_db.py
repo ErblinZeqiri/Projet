@@ -1,5 +1,5 @@
 # connect_db.py
-# OM 2020.03.12 Connexion bd
+# EZ 2020.04.05 Connexion bd
 
 import pymysql
 import pymysql.cursors
