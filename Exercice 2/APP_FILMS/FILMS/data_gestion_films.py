@@ -1,5 +1,5 @@
 # data_gestion_films.py
-# OM 2698.03.21 Permet de gérer (CRUD) les données de la table t_films
+# EZ 2020.04.27 Permet de gérer (CRUD) les données de la table t_films
 
 
 from flask import flash
@@ -67,10 +67,11 @@ class GestionFilms():
             #                                   'date_sortie_film': valeur_ins_3}
             # Rssure la personne qui dévelloppe que les valeurs à insérer sont bien à disposition.
             print(valeurs_insertion_dictionnaire)
-            str_sql_insert = "INSERT INTO t_films (ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, " \
-                             "Description, Puissance, Date_Serveur) " \
+            str_sql_insert = "INSERT INTO t_serveur (ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, " \
+                             ", Puissance, Date_Serveur) " \
                              "VALUES (NULL, %(value_Nom_Serv)s, %(value_Nombre_Port)s, %(value_Nombre_U)s, " \
-                             "%(value_Date_Conf_Serv)s, %(value_Description)s), %(value_Puissance)s), %(value_Date_Serveur)s)"
+                             "%(value_Date_Conf_Serv)s, %(value_Description)s), " \
+                             "%(value_Puissance)s), %(value_Date_Serveur)s))"
             with MaBaseDeDonnee() as ma_bd_curseur:
                 # OM Méthode "execute" définie simplement pour raccourcir la ligne de code
                 # ligne de code normale : ma_bd_moi.connexion_bd.cursor(str_sql_insert, valeurs_insertion_dictionnaire)

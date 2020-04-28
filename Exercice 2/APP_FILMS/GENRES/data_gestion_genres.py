@@ -103,7 +103,7 @@ class GestionGenres():
             # OM 2019.04.02 Commande MySql pour la MODIFICATION de la valeur "CLAVIOTTEE" dans le champ "nameEditIntituleGenreHTML" du form HTML "GenresEdit.html"
             # le "%s" permet d'éviter des injections SQL "simples"
             # <td><input type = "text" name = "nameEditIntituleGenreHTML" value="{{ row.intitule_genre }}"/></td>
-            str_sql_update_intitulegenre = "UPDATE t_personne SET Nom_Pers = %(value_Nom_Pers)s WHERE ID_Personne = %(value_id_genre)s"
+            str_sql_update_intitulegenre = "UPDATE t_personne SET Nom_Pers = %(value_name_genre)s WHERE ID_Personne = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"

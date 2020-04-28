@@ -1,5 +1,5 @@
 # routes_gestion_films.py
-# OM 2020.04.06 Gestions des "routes" FLASK pour les films.
+# EZ 2020.04.27 Gestions des "routes" FLASK pour les films.
 
 import pymysql
 from flask import render_template, flash, request

@@ -1,5 +1,5 @@
 # routes_gestion_genres.py
-# OM 2020.04.06 Gestions des "routes" FLASK pour les genres.
+# EZ 2020.04.27 Gestions des "routes" FLASK pour les genres.
 
 from flask import render_template, flash, redirect, url_for, request
 from APP_FILMS import obj_mon_application
