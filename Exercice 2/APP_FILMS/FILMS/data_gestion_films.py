@@ -21,7 +21,7 @@ class GestionFilms():
         except Exception as erreur:
             flash("Dans Gestion films ...terrible erreur, il faut connecter une base de donnée", "Danger")
             # DEBUG bon marché : Pour afficher un message dans la console.
-            print(f"Exception grave Classe constructeur GestionGenres {erreur.args[0]}")
+            print(f"Exception grave Classe constructeur GestionFilms {erreur.args[0]}")
             raise MaBdErreurConnexion(f"{msg_erreurs['ErreurConnexionBD']['message']} {erreur.args[0]}")
 
         print("Classe constructeur GestionFilms ")
@@ -59,12 +59,12 @@ class GestionFilms():
 
 
 
-    # def add_film(self, nom_film, duree_film, date_sortie_film):
-    def add_film(self, valeurs_insertion_dictionnaire):
+    # def add_films(self, nom_films, duree_films, date_sortie_films):
+    def add_films(self, valeurs_insertion_dictionnaire):
         try:
             # # Définitions d'un dictionnaire pour passer les valeurs en paramètres de façon un "peu" sécurisée dans la BD
-            # valeurs_insertion_dictionnaire = {'value_nom_film': valeur_ins_1, 'value_duree_film': valeur_ins_2,
-            #                                   'date_sortie_film': valeur_ins_3}
+            # valeurs_insertion_dictionnaire = {'value_nom_films': valeur_ins_1, 'value_duree_films': valeur_ins_2,
+            #                                   'date_sortie_films': valeur_ins_3}
             # Rssure la personne qui dévelloppe que les valeurs à insérer sont bien à disposition.
             print(valeurs_insertion_dictionnaire)
             str_sql_insert = "INSERT INTO t_serveur (ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, " \
@@ -93,3 +93,66 @@ class GestionFilms():
             # OM 2020.04.09 On dérive "Exception" par le "@obj_mon_application.errorhandler(404)" fichier "run_mon_app.py"
             # Ainsi on peut avoir un message d'erreur personnalisé.
             raise Exception(f"Raise exception... Data Gestions Films {erreur}")
+
+    def edit_film_data(self, valeur_id_dictionnaire):
+            try:
+                print(valeur_id_dictionnaire)
+                # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
+                # Commande MySql pour afficher le films sélectionné dans le tableau dans le formulaire HTML
+                str_sql_id_films = "SELECT ID_Serveur, Nom_Serv FROM t_serveur WHERE ID_Serveur = %(value_id_films)s"
+
+                # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
+                # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
+                # ainsi quand elle aura terminé l'insertion des données le destructeur de la classe "MaBaseDeDonnee"
+                # sera interprété, ainsi on fera automatiquement un commit
+                with MaBaseDeDonnee().connexion_bd as mconn_bd:
+                    with mconn_bd as mc_cur:
+                        mc_cur.execute(str_sql_id_films, valeur_id_dictionnaire)
+                        data_one = mc_cur.fetchall()
+                        print("valeur_id_dictionnaire...", data_one)
+                        return data_one
+
+            except Exception as erreur:
+                # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
+                print(f"Problème edit_films_data Data Gestions films numéro de l'erreur : {erreur}")
+                # flash(f"Flash. Problèmes Data Gestions films numéro de l'erreur : {erreur}", "danger")
+                # OM 2020.04.09 On dérive "Exception" par le "@obj_mon_application.errorhandler(404)" fichier "run_mon_app.py"
+                # Ainsi on peut avoir un message d'erreur personnalisé.
+                raise Exception(
+                    "Raise exception... Problème edit_films_data d'un films Data Gestions films {erreur}")
+
+    def update_films_data(self, valeur_update_dictionnaire):
+            try:
+                print(valeur_update_dictionnaire)
+                # OM 2019.04.02 Commande MySql pour la MODIFICATION de la valeur "CLAVIOTTEE" dans le champ "nameEditIntitulefilmHTML" du form HTML "filmEdit.html"
+                # le "%s" permet d'éviter des injections SQL "simples"
+                # <td><input type = "text" name = "nameEditIntitulefilmsHTML" value="{{ row.intitule_films }}"/></td>
+                str_sql_update_intitulefilms = "UPDATE t_personne SET Nom_Pers = %(value_name_films)s WHERE ID_Personne = %(value_id_films)s"
+
+                # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
+                # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
+                # ainsi quand elle aura terminé l'insertion des données le destructeur de la classe "MaBaseDeDonnee"
+                # sera interprété, ainsi on fera automatiquement un commit
+                with MaBaseDeDonnee().connexion_bd as mconn_bd:
+                    with mconn_bd as mc_cur:
+                        mc_cur.execute(str_sql_update_intitulefilms, valeur_update_dictionnaire)
+
+            except (Exception,
+                    pymysql.err.OperationalError,
+                    pymysql.ProgrammingError,
+                    pymysql.InternalError,
+                    pymysql.IntegrityError,
+                    TypeError) as erreur:
+                # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
+                print(f"Problème update_films_data Data Gestions films numéro de l'erreur : {erreur}")
+                # flash(f"Flash. Problèmes Data Gestions films numéro de l'erreur : {erreur}", "danger")
+                # raise Exception('Raise exception... Problème update_films_data d\'un films Data Gestions films {}'.format(str(erreur)))
+                if erreur.args[0] == 1062:
+                    flash(f"Flash. Cette valeur existe déjà : {erreur}", "danger")
+                    # Deux façons de communiquer une erreur causée par l'insertion d'une valeur à double.
+                    flash('Doublon !!! Introduire une valeur différente')
+                    # Message en cas d'échec du bon déroulement des commandes ci-dessus.
+                    print(f"Problème update_films_data Data Gestions films numéro de l'erreur : {erreur}")
+
+                    raise Exception(
+                        "Raise exception... Problème update_films_data d'un films DataGestionsfilms {erreur}")

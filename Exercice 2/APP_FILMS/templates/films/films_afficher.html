@@ -32,9 +32,9 @@
                     <td>{{ row.Description}}</td>
                     <td>{{ row.Puissance}}</td>
                     <td>{{ row.Date_Serveur}}</td>
-                    <td> <a href="{{ url_for('avertissement_sympa_pour_geeks') }}">Edit</a> </td>
-                    <td> <a href="{{ url_for('avertissement_sympa_pour_geeks') }}">Delete</a> </td>
-                    <td> <a href="{{ url_for('avertissement_sympa_pour_geeks') }}">Add</a> </td>
+                    <td> <a href="{{ url_for('film_edit') }}">Edit</a> </td>
+                    <td> <a href="{{ url_for('film_delete') }}">Delete</a> </td>
+                    <td> <a href="{{ url_for('film_add') }}">Add</a> </td>
                 </tr>
             {% endfor %}
         </table>
