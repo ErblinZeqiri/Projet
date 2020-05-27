@@ -1,11 +1,13 @@
 # routes_gestion_films.py
 # EZ 2020.04.27 Gestions des "routes" FLASK pour les films.
+import re
 
 import pymysql
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect, url_for
 from APP_FILMS import obj_mon_application
 from APP_FILMS.FILMS.data_gestion_films import GestionFilms
 from APP_FILMS.DATABASE.connect_db_context_manager import MaBaseDeDonnee
+from APP_FILMS.DATABASE.erreurs import *
 
 
 # OM 2020.04.16 Afficher les films
@@ -54,29 +56,41 @@ def film_add():
             obj_actions_films = GestionFilms()
             # OM 2020.04.09 Récupère le contenu du champ dans le formulaire HTML "film_add.html"
             name_films = request.form['name_films_html']
+            nombre_u = request.form['nombre_u_html']
+            nombre_port = request.form['Nombre_Port_html']
+            Date_Conf_Serv = request.form['Date_Conf_Serv_html']
+            Description = request.form['Description_html']
+            Puissance = request.form['Puissance_html']
+            Date_Serveur = request.form['Date_Serveur_html']
 
             # OM 2019.04.04 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
             # des valeurs avec des caractères qui ne sont pas des lettres.
             # Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
-            if not re.match("^([A-Z]|[a-z\u00C0-\u00FF])[A-Za-z\u00C0-\u00FF]*['\\- ]?[A-Za-z\u00C0-\u00FF]+$",
-                                name_films):
-                # OM 2019.03.28 Message humiliant à l'attention de l'utilisateur.
-                flash(f"Une entrée...incorrecte !! Pas de chiffres, de caractères spéciaux, d'espace à double, "
-                      f"de double apostrophe, de double trait union et ne doit pas être vide.", "Danger")
-                # On doit afficher à nouveau le formulaire "film_add.html" à cause des erreurs de "claviotage"
-                return render_template("films/film_add.html")
-            else:
+            # if not re.match("^([A-Z]|[a-z\u00C0-\u00FF])[A-Za-z\u00C0-\u00FF]*['\\- ]?[A-Za-z\u00C0-\u00FF]+$",
+            #                     name_films):
+            #     # OM 2019.03.28 Message humiliant à l'attention de l'utilisateur.
+            #     flash(f"Une entrée...incorrecte !! Pas de chiffres, de caractères spéciaux, d'espace à double, "
+            #           f"de double apostrophe, de double trait union et ne doit pas être vide.", "Danger")
+            #     # On doit afficher à nouveau le formulaire "film_add.html" à cause des erreurs de "claviotage"
+            #     return render_template("films/film_add.html")
+            # else:
 
-                # Constitution d'un dictionnaire et insertion dans la BD
-                valeurs_insertion_dictionnaire = {"value_intitule_films": name_films}
-                obj_actions_films.add_films_data(valeurs_insertion_dictionnaire)
+            # Constitution d'un dictionnaire et insertion dans la BD
+            valeurs_insertion_dictionnaire = {"value_Nom_Serv": name_films,
+                                              "value_Nombre_Port": nombre_port,
+                                              "value_Nombre_U": nombre_u,
+                                              "value_Date_Conf_Serv": Date_Conf_Serv,
+                                              "value_Description": Description,
+                                              "value_Puissance": Puissance,
+                                              "value_Date_Serveur": Date_Serveur}
+            obj_actions_films.add_films_data(valeurs_insertion_dictionnaire)
 
-                # OM 2019.03.25 Les 2 lignes ci-après permettent de donner un sentiment rassurant aux utilisateurs.
-                flash(f"Données insérées !!", "Sucess")
-                print(f"Données insérées !!")
-                # On va interpréter la "route" 'films_afficher', car l'utilisateur
-                # doit voir le nouveau films qu'il vient d'insérer.
-                return redirect(url_for('films_afficher'))
+            # OM 2019.03.25 Les 2 lignes ci-après permettent de donner un sentiment rassurant aux utilisateurs.
+            flash(f"Données insérées !!", "Sucess")
+            print(f"Données insérées !!")
+            # On va interpréter la "route" 'films_afficher', car l'utilisateur
+            # doit voir le nouveau films qu'il vient d'insérer.
+            return redirect(url_for('films_afficher'))
 
         # OM 2020.04.16 ATTENTION à l'ordre des excepts très important de respecter l'ordre.
         except pymysql.err.IntegrityError as erreur:
@@ -114,16 +128,16 @@ def film_edit():
         try:
             # Récupérer la valeur de "id_films" du formulaire html "films_afficher.html"
             # l'utilisateur clique sur le lien "edit" et on récupére la valeur de "id_films"
-            # grâce à la variable "id_film_edit_html"
-            # <a href="{{ url_for('film_edit', id_film_edit_html=row.id_films) }}">Edit</a>
-            id_film_edit = request.values['id_film_edit_html']
+            # grâce à la variable "id_films_edit_html"
+            # <a href="{{ url_for('films_edit', id_films_edit_html=row.id_films) }}">Edit</a>
+            id_films_edit = request.values['id_films_edit_html']
 
-            # Pour afficher dans la console la valeur de "id_film_edit", une façon simple de se rassurer,
+            # Pour afficher dans la console la valeur de "id_films_edit", une façon simple de se rassurer,
             # sans utiliser le DEBUGGER
-            print(id_film_edit)
+            print(id_films_edit)
 
             # Constitution d'un dictionnaire et insertion dans la BD
-            valeur_select_dictionnaire = {"value_id_films": id_film_edit}
+            valeur_select_dictionnaire = {"value_id_films": id_films_edit}
 
             # OM 2020.04.09 Objet contenant toutes les méthodes pour gérer (CRUD) les données.
             obj_actions_films = GestionFilms()
@@ -314,4 +328,4 @@ def film_delete():
 
 
             # OM 2019.04.02 Envoie la page "HTML" au serveur.
-    return render_template('films/films_afficher.html', data=data_films)
+    return render_template('films/film_delete.html', data=data_films)

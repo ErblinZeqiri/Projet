@@ -20,7 +20,7 @@ USE erblin_zeqiri_conf-serveur_1c_2020;
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Dim 26 Avril 2020 à 15:04
+-- Généré le :  Mer 27 Mai 2020 à 12:29
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -84,9 +84,9 @@ INSERT INTO `t_mail` (`ID_Mail`, `Adresse_Mail`) VALUES
 
 CREATE TABLE `t_personne` (
   `ID_Personne` int(11) NOT NULL,
-  `Nom_Pers` varchar(40) NOT NULL,
-  `Prenom_Pers` varchar(40) NOT NULL,
-  `Date_Naissance_Pers` date NOT NULL
+  `Nom_Pers` varchar(40) DEFAULT NULL,
+  `Prenom_Pers` varchar(40) DEFAULT NULL,
+  `Date_Naissance_Pers` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -97,7 +97,11 @@ INSERT INTO `t_personne` (`ID_Personne`, `Nom_Pers`, `Prenom_Pers`, `Date_Naissa
 (1, 'Zeqiri', 'Erblin', '1998-10-17'),
 (2, 'clowneriea', 'reererwre', '2018-11-22'),
 (4, 'Jean', 'Dujardin', '1985-11-25'),
-(6, 'Jean', 'Dujardin', '1985-11-25');
+(6, 'Jean', 'Dujardin', '1985-11-25'),
+(8, 'asa', 'asdasd', '2020-03-10'),
+(10, 'adssad', 'rff', '2020-04-01'),
+(11, 'sdfsdfss', NULL, NULL),
+(13, 'bhhnhiik', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -166,11 +170,13 @@ CREATE TABLE `t_serveur` (
 --
 
 INSERT INTO `t_serveur` (`ID_Serveur`, `Nom_Serv`, `Nombre_Port`, `Nombre_U`, `Date_Conf_Serv`, `Description`, `Puissance`, `Date_Serveur`) VALUES
-(1, '', 2, 4, '2020-03-18', 'voila voila', 51, '2020-03-10 15:13:24'),
-(2, '', 31121231, 2111, '2020-03-25', 'qweweqewq', 21321321, '2020-03-10 17:05:29'),
-(3, '', 0, 0, '0000-00-00', 'voilà c\'est tellement rose', 0, '2020-03-24 19:42:46'),
+(1, 'cv vccvf', 2, 4, '2020-03-18', 'voila voila', 51, '2020-03-10 15:13:24'),
+(2, 'bvcxbcvbvbvc', 31121231, 2111, '2020-03-25', 'qweweqewq', 21321321, '2020-03-10 17:05:29'),
+(3, 'fdgdfdfg', 0, 0, '0000-00-00', 'voilà c\'est tellement rose', 0, '2020-03-24 19:42:46'),
 (5, 'serveur23', 234, 2111, '2020-05-15', 'werew', 323223, '2020-04-05 13:30:49'),
-(6, 'serveur23', 20, 12, '2020-05-15', 'wesh bien ou quoi', 2500, '2020-04-05 13:33:05');
+(6, 'serveur23', 20, 12, '2020-05-15', 'wesh bien ou quoi', 2500, '2020-04-05 13:33:05'),
+(7, 'tg', 27, 27, '2020-05-20', 'tg bouffon\r\n', 5345, '2020-05-20 12:36:49'),
+(8, 'tg', 27, 27, '2020-05-20', 'tg bouffon', 5345, '2020-05-27 12:04:47');
 
 -- --------------------------------------------------------
 
@@ -378,7 +384,7 @@ ALTER TABLE `t_mail`
 -- AUTO_INCREMENT pour la table `t_personne`
 --
 ALTER TABLE `t_personne`
-  MODIFY `ID_Personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `t_pers_a_mail`
 --
@@ -393,7 +399,7 @@ ALTER TABLE `t_pers_a_serveur`
 -- AUTO_INCREMENT pour la table `t_serveur`
 --
 ALTER TABLE `t_serveur`
-  MODIFY `ID_Serveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Serveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `t_serv_a_location`
 --

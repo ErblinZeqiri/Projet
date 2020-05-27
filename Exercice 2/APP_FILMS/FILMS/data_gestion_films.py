@@ -60,18 +60,25 @@ class GestionFilms():
 
 
     # def add_films(self, nom_films, duree_films, date_sortie_films):
-    def add_films(self, valeurs_insertion_dictionnaire):
+    def add_films_data(self, valeurs_insertion_dictionnaire):
         try:
             # # Définitions d'un dictionnaire pour passer les valeurs en paramètres de façon un "peu" sécurisée dans la BD
             # valeurs_insertion_dictionnaire = {'value_nom_films': valeur_ins_1, 'value_duree_films': valeur_ins_2,
             #                                   'date_sortie_films': valeur_ins_3}
             # Rssure la personne qui dévelloppe que les valeurs à insérer sont bien à disposition.
             print(valeurs_insertion_dictionnaire)
-            str_sql_insert = "INSERT INTO t_serveur (ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, " \
-                             ", Puissance, Date_Serveur) " \
-                             "VALUES (NULL, %(value_Nom_Serv)s, %(value_Nombre_Port)s, %(value_Nombre_U)s, " \
-                             "%(value_Date_Conf_Serv)s, %(value_Description)s), " \
-                             "%(value_Puissance)s), %(value_Date_Serveur)s))"
+            # str_sql_insert = "INSERT INTO t_serveur (ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, " \
+            #                  ", Puissance, Date_Serveur) " \
+            #                  "VALUES (NULL, %(value_Nom_Serv)s, %(value_Nombre_Port)s, %(value_Nombre_U)s, " \
+            #                  "%(value_Date_Conf_Serv)s, %(value_Description)s), " \
+            #                  "%(value_Puissance)s), %(value_Date_Serveur)s))"
+            str_sql_insert = """INSERT INTO `t_serveur` (`ID_Serveur`, `Nom_Serv`, `Nombre_Port`, `Nombre_U`, 
+             `Date_Conf_Serv`, `Description`, `Puissance`, `Date_Serveur`) VALUES (NULL, %(value_Nom_Serv)s, 
+            %(value_Nombre_Port)s, %(value_Nombre_U)s, %(value_Date_Conf_Serv)s, %(value_Description)s, 
+            %(value_Puissance)s), %(value_Date_Serveur)s)"""
+
+            str_sql_insert = """INSERT INTO `t_serveur` (`ID_Serveur`, `Nom_Serv`, `Nombre_Port`, `Nombre_U`, `Date_Conf_Serv`, `Description`, `Puissance`, `Date_Serveur`) VALUES (NULL, 'TGGGGGGGGGGGGGGGGGGGGGG', '876', '78', '2020-05-27', 'TGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG', '6666666', CURRENT_TIMESTAMP);
+["""
             with MaBaseDeDonnee() as ma_bd_curseur:
                 # OM Méthode "execute" définie simplement pour raccourcir la ligne de code
                 # ligne de code normale : ma_bd_moi.connexion_bd.cursor(str_sql_insert, valeurs_insertion_dictionnaire)
