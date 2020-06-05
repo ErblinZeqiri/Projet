@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}DELETE Personne{% endblock %}
+{% block body %}
+    <div class="home">
+        <BODY bgcolor="yellow">
+            <form method="POST" action="{{ url_for('films_delete') }}">
+                <div>
+
+                </div>
+                <br>
+                <table border="1" cellpadding="5" cellspacing="5">
+                    <thead>
+                        <tr>
+                            <th>ID Personne</th>
+                            <th>Nom Personne</th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tr>
+                            <td><input type="hidden" name="id_films_delete_html" value="{{ row.ID_Serveur }}"></td>
+                            <td>{{ row.Nom_Serv }}</td>
+                            <td>{{ row.Nombre_Port }}</td>
+                            <td>{{ row.Nombre_U }}</td>
+                            <td>{{ row.Date_Conf_Serv }}</td>
+                            <td>{{ row.Description }}</td>
+                            <td>{{ row.Puissance }}</td>
+                            <td>{{ row.Date_Serveur }}</td>
+                            <td><button class="btn btn-danger" type="submit">EFFACER</button></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </BODY>
+    </div>
+{% endblock %}
