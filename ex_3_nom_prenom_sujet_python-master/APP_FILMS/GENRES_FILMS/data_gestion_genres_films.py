@@ -28,7 +28,7 @@ class GestionGenresFilms():
             # la commande MySql classique est "SELECT * FROM t_genres"
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
-            strsql_genres_afficher = """SELECT ID_Personne, Nom_Pers FROM t_personne ORDER BY ID_Personne ASC"""
+            strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genres ORDER BY id_genre ASC"""
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
                 # Envoi de la commande MySql
@@ -60,21 +60,21 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_film_selected = """SELECT ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, Description, Puissance, Date_Serveur, GROUP_CONCAT(ID_Personne) as GenresFilms FROM t_pers_a_serveur AS T1
-                                        INNER JOIN t_serveur AS T2 ON T2.ID_Serveur = T1.FK_Serveur
-                                        INNER JOIN t_personne AS T3 ON T3.ID_Personne = T1.FK_Personne
-                                        WHERE ID_Serveur = %(value_id_film_selected)s"""
+            strsql_film_selected = """SELECT id_film, nom_film, duree_film, description_film, cover_link_film, date_sortie_film, GROUP_CONCAT(id_genre) as GenresFilms FROM t_genres_films AS T1
+                                        INNER JOIN t_films AS T2 ON T2.id_film = T1.fk_film
+                                        INNER JOIN t_genres AS T3 ON T3.id_genre = T1.fk_genre
+                                        WHERE id_film = %(value_id_film_selected)s"""
 
-            strsql_genres_films_non_attribues = """SELECT ID_Personne, Nom_Pers FROM t_personne
-                                                    WHERE ID_Personne not in(SELECT ID_Personne as idGenresFilms FROM t_pers_a_serveur AS T1
-                                                    INNER JOIN t_serveur AS T2 ON T2.ID_Serveur = T1.FK_Serveur
-                                                    INNER JOIN t_personne AS T3 ON T3.ID_Personne = T1.FK_Personne
-                                                    WHERE ID_Serveur = %(value_id_film_selected)s)"""
+            strsql_genres_films_non_attribues = """SELECT id_genre, intitule_genre FROM t_genres
+                                                    WHERE id_genre not in(SELECT id_genre as idGenresFilms FROM t_genres_films AS T1
+                                                    INNER JOIN t_films AS T2 ON T2.id_film = T1.fk_film
+                                                    INNER JOIN t_genres AS T3 ON T3.id_genre = T1.fk_genre
+                                                    WHERE id_film = %(value_id_film_selected)s)"""
 
-            strsql_genres_films_attribues = """SELECT ID_Serveur, ID_Personne, Nom_Pers FROM t_pers_a_serveur AS T1
-                                            INNER JOIN t_serveur AS T2 ON T2.ID_Serveur = T1.FK_Serveur
-                                            INNER JOIN t_personne AS T3 ON T3.ID_Personne = T1.FK_Personne
-                                            WHERE ID_Serveur = %(value_id_film_selected)s"""
+            strsql_genres_films_attribues = """SELECT id_film, id_genre, intitule_genre FROM t_genres_films AS T1
+                                            INNER JOIN t_films AS T2 ON T2.id_film = T1.fk_film
+                                            INNER JOIN t_genres AS T3 ON T3.id_genre = T1.fk_genre
+                                            WHERE id_film = %(value_id_film_selected)s"""
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
@@ -123,11 +123,11 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_genres_films_afficher_data_concat = """SELECT ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, Description, Puissance, Date_Serveur, 
-                                                            GROUP_CONCAT(Nom_Pers) as GenresFilms FROM t_pers_a_serveur AS T1
-                                                            RIGHT JOIN t_serveur AS T2 ON T2.ID_Serveur = T1.FK_Serveur
-                                                            LEFT JOIN t_personne AS T3 ON T3.ID_Personne = T1.FK_Personne
-                                                            GROUP BY ID_Serveur"""
+            strsql_genres_films_afficher_data_concat = """SELECT id_film, nom_film, duree_film, description_film, cover_link_film, date_sortie_film,
+                                                            GROUP_CONCAT(intitule_genre) as GenresFilms FROM t_genres_films AS T1
+                                                            RIGHT JOIN t_films AS T2 ON T2.id_film = T1.fk_film
+                                                            LEFT JOIN t_genres AS T3 ON T3.id_genre = T1.fk_genre
+                                                            GROUP BY id_film"""
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
@@ -170,7 +170,7 @@ class GestionGenresFilms():
             print(valeurs_insertion_dictionnaire)
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Insérer une (des) nouvelle(s) association(s) entre "id_film" et "id_genre" dans la "t_genre_film"
-            strsql_insert_genre_film = """INSERT INTO t_pers_a_serveur (ID_Pers_A_Serveur, FK_Personne, FK_Serveur)
+            strsql_insert_genre_film = """INSERT INTO t_genres_films (id_genre_film, fk_genre, fk_film)
                                             VALUES (NULL, %(value_fk_genre)s, %(value_fk_film)s)"""
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
@@ -192,7 +192,7 @@ class GestionGenresFilms():
             print(valeurs_insertion_dictionnaire)
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Effacer une (des) association(s) existantes entre "id_film" et "id_genre" dans la "t_genre_film"
-            strsql_delete_genre_film = """DELETE FROM t_pers_a_serveur WHERE FK_Personne = %(value_fk_genre)s AND FK_Serveur = %(value_fk_film)s"""
+            strsql_delete_genre_film = """DELETE FROM t_genres_films WHERE fk_genre = %(value_fk_genre)s AND fk_film = %(value_fk_film)s"""
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -218,7 +218,7 @@ class GestionGenresFilms():
             print(valeur_id_dictionnaire)
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Commande MySql pour afficher le genre sélectionné dans le tableau dans le formulaire HTML
-            str_sql_id_genre = "SELECT ID_Personne, Nom_Pers FROM t_personne WHERE ID_Personne = %(value_id_genre)s"
+            str_sql_id_genre = "SELECT id_genre, intitule_genre FROM t_genres WHERE id_genre = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -246,7 +246,7 @@ class GestionGenresFilms():
             # OM 2019.04.02 Commande MySql pour la MODIFICATION de la valeur "CLAVIOTTEE" dans le champ "nameEditIntituleGenreHTML" du form HTML "GenresEdit.html"
             # le "%s" permet d'éviter des injections SQL "simples"
             # <td><input type = "text" name = "nameEditIntituleGenreHTML" value="{{ row.intitule_genre }}"/></td>
-            str_sql_update_intitulegenre = "UPDATE t_personne SET Nom_Pers = %(value_name_genre)s WHERE ID_Personne = %(value_id_genre)s"
+            str_sql_update_intitulegenre = "UPDATE t_genres SET intitule_genre = %(value_name_genre)s WHERE id_genre = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -284,7 +284,7 @@ class GestionGenresFilms():
 
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Commande MySql pour afficher le genre sélectionné dans le tableau dans le formulaire HTML
-            str_sql_select_id_genre = "SELECT ID_Personne, Nom_Pers FROM t_genres WHERE ID_Personne = %(value_id_genre)s"
+            str_sql_select_id_genre = "SELECT id_genre, intitule_genre FROM t_genres WHERE id_genre = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode"mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -316,7 +316,7 @@ class GestionGenresFilms():
             # OM 2019.04.02 Commande MySql pour EFFACER la valeur sélectionnée par le "bouton" du form HTML "GenresEdit.html"
             # le "%s" permet d'éviter des injections SQL "simples"
             # <td><input type = "text" name = "nameEditIntituleGenreHTML" value="{{ row.intitule_genre }}"/></td>
-            str_sql_delete_intitulegenre = "DELETE FROM t_personne WHERE ID_Personne = %(value_id_genre)s"
+            str_sql_delete_intitulegenre = "DELETE FROM t_genres WHERE id_genre = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"

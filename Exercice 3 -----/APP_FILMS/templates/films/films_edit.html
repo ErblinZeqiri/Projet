@@ -7,7 +7,7 @@
 			<p>
 				Modifier ce genre.
 			</p>
-			<form method="POST" action="{{ url_for('genres_update') }}">
+			<form method="POST" action="{{ url_for('films_update') }}">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
@@ -15,7 +15,22 @@
                                 id genre
                             </th>
                             <th>
-                                Genre
+                                Nom du serveur
+                            </th>
+                            <th>
+                                Nombre de port
+                            </th>
+                            <th>
+                                Nombre de U
+                            </th>
+                            <th>
+                                Date de Configuration
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Puissance
                             </th>
                         </tr>
                     </thead>
@@ -23,10 +38,25 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" name="id_genre_edit_html" value="{{ row.ID_Personne }}"/>
+                                    <input type="hidden" name="id_film_edit_html" value="{{ row.ID_Serveur }}"/>
                                 </td>
                                 <td>
-                                    <input type = "text" name = "name_edit_intitule_genre_html" value="{{ row.Nom_Pers }}"/>
+                                    <input type = "text" name = "name_edit_Nom_Serv_html" value="{{ row.Nom_Serv }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Nombre_Port_html" value="{{ row.Nombre_Port }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "<name_edit_Nombre_u_html>" value="{{ row.Nombre_U }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Date_Conf_Serv_html" value="{{ row.Date_Conf_Serv }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Description_html" value="{{ row.Description }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Puissance_html" value="{{ row.Puissance }}"/>
                                 </td>
                                 <td>
                                     <button class="btn btn-warning" type="submit">Update</button>
