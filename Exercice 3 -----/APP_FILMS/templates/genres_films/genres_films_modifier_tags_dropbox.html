@@ -41,22 +41,28 @@
                     <thead>
                         <tr>
                             <th class="">
-                                id
+                                ID
                             </th>
                             <th class="">
-                                Titre
+                                Nom du Serveur
                             </th>
                             <th class="">
-                                Durée
+                                Nombre de Port
                             </th>
                             <th class="">
-                                Date sortie
+                                Nombre de U
+                            </th>
+                            <th class="">
+                                Date de Configuration du Serveur
                             </th>
                             <th class="">
                                 Description
                             </th>
                             <th class="">
-                                Affiche
+                                Puissance
+                            </th>
+                            <th class="">
+                                Date de la demande
                             </th>
                         </tr>
                     </thead>
@@ -87,11 +93,7 @@
 							{{ row.Puissance|default("", True) }}
 						</td>
 						<td class="align-middle">
-							{{ row.Datve_Serveur|default("", True) }}
-						</td>
-						<td class="align-middle">
-<!--                            <img class="img-thumbnail" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display: block;width:auto;max-height:450px;" alt = "Covid-19 grand semi-confinement mod 104">-->
-                            <img class="img-thumbnail" src={{ row.cover_link_film|default(None, True) }} style="border: 0;" alt = "Covid-19 grand semi-confinement mod 104">
+							{{ row.Date_Serveur|default("", True) }}
 						</td>
 					</tr>
 				</tbody>
@@ -102,7 +104,7 @@
 							Aucun film.
 						</td>
 						<td>
-							<a class="btn btn-primary" href="{{ url_for('avertissement_sympa_pour_geeks') }}" role="button">Add</a>
+							<a class="btn btn-primary" href="{{ url_for('films_add') }}" role="button">Add</a>
 						</td>
 					</tr>
 				</tbody>
@@ -119,11 +121,11 @@
                 <div class="qtagselect isw360">
                     <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
                         {% for row in data_genres_non_attribues %}
-                            <option value="{{ row.id_genre }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.intitule_genre }}</option>
+                            <option value="{{ row.ID_Personne }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.Nom_Pers }}</option>
                         {% endfor %}
 
                         {% for row in data_genres_attribues %}
-                            <option value="{{ row.id_genre }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.intitule_genre }}</option>
+                            <option value="{{ row.ID_Personne }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Nom_Pers }}</option>
                         {% endfor %}
                     </select>
                 </div>

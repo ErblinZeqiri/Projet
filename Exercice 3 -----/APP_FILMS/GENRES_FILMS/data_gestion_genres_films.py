@@ -60,7 +60,8 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_film_selected = """SELECT ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, Description, Puissance, Date_Serveur, GROUP_CONCAT(ID_Personne) as GenresFilms FROM t_pers_a_serveur AS T1
+            strsql_film_selected = """SELECT ID_Serveur, Nom_Serv, Nombre_Port, Nombre_U, Date_Conf_Serv, Description, Puissance, Date_Serveur, 
+                                        GROUP_CONCAT(ID_Personne) as GenresFilms FROM t_pers_a_serveur AS T1
                                         INNER JOIN t_serveur AS T2 ON T2.ID_Serveur = T1.FK_Serveur
                                         INNER JOIN t_personne AS T3 ON T3.ID_Personne = T1.FK_Personne
                                         WHERE ID_Serveur = %(value_id_film_selected)s"""
@@ -138,7 +139,7 @@ class GestionGenresFilms():
                 else:
                     # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
                     valeur_id_film_selected_dictionnaire = {"value_id_film_selected": id_film_selected}
-                    strsql_genres_films_afficher_data_concat += """ HAVING id_film= %(value_id_film_selected)s"""
+                    strsql_genres_films_afficher_data_concat += """ HAVING ID_Serveur= %(value_id_film_selected)s"""
                     # Envoi de la commande MySql
                     mc_afficher.execute(strsql_genres_films_afficher_data_concat, valeur_id_film_selected_dictionnaire)
 

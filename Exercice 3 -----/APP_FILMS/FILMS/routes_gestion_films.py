@@ -208,7 +208,7 @@ def films_update ():
             # Récupère le contenu du champ "intitule_film" dans le formulaire HTML "filmsEdit.html"
             Nom_Serv = request.values['name_edit_Nom_Serv_html']
             Nombre_Port = request.values['name_edit_Nombre_Port_html']
-            Nombre_U = request.values['name_edit_Nombre_u_html']
+            Nombre_U = request.values['name_edit_Nombre_U_html']
             Date_Conf_Serv = request.values['name_edit_Date_Conf_Serv_html']
             Description = request.values['name_edit_Description_html']
             Puissance = request.values['name_edit_Puissance_html']

@@ -86,14 +86,14 @@ def gf_edit_genre_film_selected ():
             data_genre_film_selected, data_genres_films_non_attribues, data_genres_films_attribues = \
                 obj_actions_genres.genres_films_afficher_data(valeur_id_film_selected_dictionnaire)
 
-            lst_data_film_selected = [item['id_film'] for item in data_genre_film_selected]
+            lst_data_film_selected = [item['ID_Serveur'] for item in data_genre_film_selected]
             # DEBUG bon marché : Pour afficher le résultat et son type.
             print("lst_data_film_selected  ", lst_data_film_selected,
                   type(lst_data_film_selected))
 
             # Dans le composant "tags-selector-tagselect" on doit connaître
             # les genres qui ne sont pas encore sélectionnés.
-            lst_data_genres_films_non_attribues = [item['id_genre'] for item in data_genres_films_non_attribues]
+            lst_data_genres_films_non_attribues = [item['ID_Personne'] for item in data_genres_films_non_attribues]
             session['session_lst_data_genres_films_non_attribues'] = lst_data_genres_films_non_attribues
             # DEBUG bon marché : Pour afficher le résultat et son type.
             print("lst_data_genres_films_non_attribues  ", lst_data_genres_films_non_attribues,
@@ -101,7 +101,7 @@ def gf_edit_genre_film_selected ():
 
             # Dans le composant "tags-selector-tagselect" on doit connaître
             # les genres qui sont déjà sélectionnés.
-            lst_data_genres_films_old_attribues = [item['id_genre'] for item in data_genres_films_attribues]
+            lst_data_genres_films_old_attribues = [item['ID_Personne'] for item in data_genres_films_attribues]
             session['session_lst_data_genres_films_old_attribues'] = lst_data_genres_films_old_attribues
             # DEBUG bon marché : Pour afficher le résultat et son type.
             print("lst_data_genres_films_old_attribues  ", lst_data_genres_films_old_attribues,
@@ -116,7 +116,7 @@ def gf_edit_genre_film_selected ():
 
             # Extrait les valeurs contenues dans la table "t_genres", colonne "intitule_genre"
             # Le composant javascript "tagify" pour afficher les tags n'a pas besoin de l'id_genre
-            lst_data_genres_films_non_attribues = [item['intitule_genre'] for item in data_genres_films_non_attribues]
+            lst_data_genres_films_non_attribues = [item['Nom_Pers'] for item in data_genres_films_non_attribues]
             # DEBUG bon marché : Pour afficher le résultat et son type.
             print("lst_all_genres gf_edit_genre_film_selected ", lst_data_genres_films_non_attribues,
                   type(lst_data_genres_films_non_attribues))
