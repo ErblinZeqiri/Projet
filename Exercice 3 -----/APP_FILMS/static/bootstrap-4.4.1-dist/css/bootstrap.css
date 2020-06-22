@@ -6676,7 +6676,7 @@ a.close.disabled {
   vertical-align: top !important;
 }
 
-.align-middle {
+.align-middle, .foot {
   vertical-align: middle !important;
 }
 

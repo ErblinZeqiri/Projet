@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Ajouter un serveur{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Ajouter un nouveau serveur
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					Nom Serveur <input type = "text" name= "Nom_Serv_html" /> <br>
+                	Nombre Port <input type = "text" name= "Nombre_Port_html" /> <br>
+                	Nombre de U <input type = "text" name= "Nombre_U_html" /> <br>
+               		Date de configuration de serveur <input type = "text" name= "Date_Conf_Serv_html" /> <br>
+                	Description <input type = "text" name= "Description_html" /> <br>
+                	Puissance <input type = "text" name= "Puissance_html" /> <br>
+               		<input type = "hidden" name= "Date_Serveur_html" /> <br>
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer le serveur
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
