@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Ajout d'un status{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Créer un status
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					<label for="Status_html">Status</label>
+					<input type ="text" class="form-control" id="Status_html" name="Status_html" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer le Status
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

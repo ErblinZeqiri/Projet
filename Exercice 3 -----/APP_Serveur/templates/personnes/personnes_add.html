@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} Ajout d'un demandeur{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Ajouter une personne :
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					<label for="Nom_Pers_html">Nom du demandeur</label>
+					<input type ="text" class="form-control" id="Nom_Pers_html" name="Nom_Pers_html" />
+
+					<label for="Prenom_Pers_html">Prénom du demandeur</label>
+					<input type ="text" class="form-control" id="Prenom_Pers_html" name="Prenom_Pers_html" />
+
+					<label for="Date_Naissance_Pers_html">Date de naissance du demandeur</label>
+					<input type ="date" class="form-control" id="Date_Naissance_Pers_html" name="Date_Naissance_Pers_html" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer la personne
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
